@@ -8,7 +8,7 @@ const CoffeeStore = () => {
   return (
     <div>
       Coffee Store Page {id}
-      <Link href='/'>
+      <Link  legacyBehavior  href='/'>
         <a>Back</a></Link>
     </div>
   )
