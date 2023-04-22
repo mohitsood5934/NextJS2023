@@ -4,9 +4,9 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Component {...pageProps} />
-      <footer>
+      {/* <footer>
         <p>Mohit @20203</p>
-      </footer>
+      </footer> */}
     </>
   );
 }
