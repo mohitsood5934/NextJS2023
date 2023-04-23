@@ -7,5 +7,3 @@
 - foursquare.com -> API
 - https://location.foursquare.com/developer/
 - unsplash API ( unsplash.com/developers)
-
-2ciN-ZvE-WAxYylcGfxdSSe1pOM43RbOkPgXx5neDlE
