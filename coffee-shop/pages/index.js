@@ -16,7 +16,6 @@ export async function getStaticProps(context) {
   };
 }
 export default function Home(props) {
-  console.log(props, "xxx");
 
   const { latLong, handleTrackLocation, locationErrorMsg, isFindingLocation } =
     useTrackLocation();
