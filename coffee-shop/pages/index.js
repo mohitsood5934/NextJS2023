@@ -8,6 +8,16 @@ import useTrackLocation from "@/hooks/use-track-location";
 import { useContext, useEffect, useState } from "react";
 import { ACTION_TYPES, StoreContext } from "../store/store-context";
 
+/*  you should not fetch API route from getStaticProps instead you can write the server side code directly 
+in the  getStaticProps method.Here I am referring to the server side code that is written inside the api
+folder */
+
+/* Why not calling api route directly ?
+
+Answer: getStaticProps is called during build time (for prerendering) and at that time user is not making 
+any request . If we call API at this time then API route is even not available at this time as server has not
+started properly . So due to this reason , if you call internal API  at this time then it might fail. */
+
 export async function getStaticProps(context) {
   const coffeeStores = await fetchCoffeeStores();
   return {
@@ -32,12 +42,14 @@ export default function Home(props) {
   useEffect(() => {
     const fetchStores = async (latLong) => {
       try {
-        const fetchedCoffeeStores = await fetchCoffeeStores(latLong, 30);
+        const response = await fetch(`api/getCoffeeStoresByLocation?latLong=${latLong}&limit=30`);
         // setCoffeeStores(fetchedCoffeeStores);
+        const coffeeStores = await response.json();
         dispatch({
           type: ACTION_TYPES.SET_COFFEE_STORES,
-          payload: { coffeeStores: fetchedCoffeeStores },
+          payload: { coffeeStores },
         });
+        setCoffeeStoresError('');
       } catch (error) {
         setCoffeeStoresError(error?.message);
         console.log(`Error occurred while fetching coffee stores - ${error}`);
